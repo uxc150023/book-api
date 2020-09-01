@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    # 连接数据库library
+#    url: jdbc:mysql://139.224.134.162:3306/book_manage?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/book?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    # 打印sql
+    show-sql: true
+    properties:
+      hibernate:
+        # 格式化sql
+        format_sql: true
+
+server:
+  port: 8181
