@@ -33,5 +33,10 @@ public class BookService {
         Category category = categoryService.get(cid);
         return bookDAO.findAllByCategory(category);
     }
+
+    public List<Book> search(String keywords) {
+        return bookDAO.findAllByTitleLikeOrAuthorLike('%' + keywords + '%', '%' + keywords + '%');
+    }
+
 }
 

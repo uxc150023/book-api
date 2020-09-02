@@ -1,7 +1,7 @@
 package com.book.controller;
 
-
 import com.book.pojo.Book;
+import com.book.result.JsonResult;
 import com.book.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,30 +14,43 @@ public class LibraryController {
     @Autowired
     BookService bookService;
 
-    @GetMapping("/findAll")
-    public List<Book> list() throws Exception {
-        return bookService.list();
+    @GetMapping("/book/findAll")
+    public JsonResult<Object> list() throws Exception {
+        return new JsonResult<>(bookService.list(), "0");
     }
 
-    @PostMapping("/add")
-    public Book addOrUpdate(@RequestBody Book book) throws Exception {
+
+    @PutMapping("/book/update")
+    public JsonResult<Object> addOrUpdate(@RequestBody Book book) throws Exception {
         bookService.addOrUpdate(book);
-        return book;
+        return new JsonResult<>(book, "0");
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/book/delete")
     public void delete(@RequestBody Book book) throws Exception {
         bookService.deleteById(book.getId());
     }
     
 
-    @GetMapping("/categories/{cid}")
-    public List<Book> listByCategory(@PathVariable("cid") int cid) throws Exception {
+    @GetMapping("/book/categories/{cid}")
+    public JsonResult<Object> listByCategory(@PathVariable("cid") int cid) throws Exception {
         if (0 != cid) {
-            return bookService.listByCategory(cid);
+            return new JsonResult<>(bookService.listByCategory(cid), "0");
         } else {
             return list();
         }
     }
+
+    @CrossOrigin
+    @GetMapping("/book/search")
+    public JsonResult<Object> searchResult(@RequestParam("keywords") String keywords) {
+    	// 关键词为空时查询出所有书籍
+        if ("".equals(keywords)) {
+            return  new JsonResult<>(bookService.list(), "0");
+        } else {
+            return new JsonResult<>(bookService.search(keywords), "0");
+        }
+    }
+
 }
 

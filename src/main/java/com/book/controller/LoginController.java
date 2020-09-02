@@ -10,8 +10,6 @@ import org.springframework.web.util.HtmlUtils;
 import com.book.pojo.User;
 import com.book.service.UserService;
 
-import java.util.Objects;
-
 @Controller
 @RequestMapping("/book")
 public class LoginController {

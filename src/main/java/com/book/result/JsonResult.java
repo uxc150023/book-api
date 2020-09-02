@@ -48,7 +48,7 @@ public class JsonResult<T> {
      */
     public JsonResult(T data, String msg) {
         this.data = data;
-        this.status = status;
+        this.status = 0;
         this.code = "0";
         this.msg = msg;
     }
