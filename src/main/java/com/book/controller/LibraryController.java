@@ -27,8 +27,9 @@ public class LibraryController {
     }
 
     @PostMapping("/book/delete")
-    public void delete(@RequestBody Book book) throws Exception {
+    public JsonResult<String> delete(@RequestBody Book book) throws Exception {
         bookService.deleteById(book.getId());
+        return new JsonResult<>("true");
     }
     
 
